@@ -39,4 +39,6 @@ try:
 except serial.SerialException:
     status_label.config(text="Не удается подключиться")
 
+print('GitHub test!')
+
 main_window.mainloop()
