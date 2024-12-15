@@ -15,7 +15,7 @@ def send_delay():
     try:
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
-        status_label.config(text=f'ОШИБКА! {exc}')
+        status_label.config(text=f"ОШИБКА! {exc}")
         return
     if delay_ms < 0:
         status_label.config(
