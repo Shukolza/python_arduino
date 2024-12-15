@@ -13,7 +13,7 @@ def send_delay():
     global status_label
     global LANGUAGE
 
-    delay_ms = int(delay_entry.get())
+    delay_ms = int(delay_entry.get()) * 1000
     if delay_ms < 0:
         status_label.config(
             text=(
@@ -92,9 +92,9 @@ status_label.pack()
 attention = ttk.Label(
     main_window,
     text=(
-        "Задержку нужно вводить в миллисекундах!"
+        "Задержку нужно вводить в секундах!"
         if LANGUAGE == "RU"
-        else "The delay must be entered in milliseconds"
+        else "The delay must be entered in seconds"
     ),
 )
 attention.pack()
