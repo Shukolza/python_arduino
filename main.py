@@ -4,7 +4,7 @@ from time import sleep
 import tkinter
 from tkinter import ttk
 
-LANGUAGE = "RU"
+LANGUAGE = str()
 
 
 def send_delay():
@@ -59,6 +59,7 @@ with open("language.txt", "r") as file:
         choose_language = tkinter.Tk()
         choose_language.title("Choose language")
         choose_language.geometry("300x100")
+        choose_language.iconbitmap('img/134948246.ico')
 
         languages_label = ttk.Label(
             choose_language, text="Choose language / Выберите язык"
@@ -79,6 +80,7 @@ with open("language.txt", "r") as file:
 main_window = tkinter.Tk()
 main_window.title("Управление arduino" if LANGUAGE == "RU" else "Arduino control")
 main_window.geometry("800x600")
+main_window.iconbitmap('img/134948246.ico')
 
 delay_entry = ttk.Entry(main_window)
 button_test = ttk.Button(
