@@ -37,6 +37,8 @@ def russian():
     choose_language.destroy()
     choose_language.quit()
     LANGUAGE = "RU"
+    with open('language.txt', 'w') as file:
+        file.write(LANGUAGE)
 
 
 def english():
@@ -44,21 +46,29 @@ def english():
     choose_language.destroy()
     choose_language.quit()
     LANGUAGE = "EN"
+    with open('language.txt', 'w') as file:
+        file.write(LANGUAGE)
 
+with open('language.txt', 'r') as file:
+    lang = file.read()
+    if lang == '':
+        choose_language = tkinter.Tk()
+        choose_language.title("Choose language")
+        choose_language.geometry("300x100")
 
-choose_language = tkinter.Tk()
-choose_language.title("Choose language")
-choose_language.geometry("300x100")
+        languages_label = ttk.Label(choose_language, text="Choose language / Выберите язык")
+        russian_button = ttk.Button(choose_language, text="Русский", command=russian)
+        english_button = ttk.Button(choose_language, text="English", command=english)
 
-languages_label = ttk.Label(choose_language, text="Choose language / Выберите язык")
-russian_button = ttk.Button(choose_language, text="Русский", command=russian)
-english_button = ttk.Button(choose_language, text="English", command=english)
+        languages_label.grid(column=0, row=0)
+        russian_button.grid(column=0, row=1)
+        english_button.grid(column=1, row=1)
 
-languages_label.grid(column=0, row=0)
-russian_button.grid(column=0, row=1)
-english_button.grid(column=1, row=1)
-
-choose_language.mainloop()
+        choose_language.mainloop()
+    elif lang == 'RU':
+        LANGUAGE = 'RU'
+    else:
+        LANGUAGE = 'EN'
 
 main_window = tkinter.Tk()
 main_window.title("Управление arduino" if LANGUAGE == "RU" else "Arduino control")
