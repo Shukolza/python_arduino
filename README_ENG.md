@@ -24,6 +24,10 @@ Port check: COM3 (USB-SERIAL CH340 (COM3)) <<< <strong>HERE IS ARDUINO!!!</stron
 Port COM3 is available.<br>
 </p>
 
+<p>
+If you want to reset the language selection, clear the <strong>"language.txt"</strong> file completely
+</p>
+
 <p><strong>ATTENTION!!!!</strong> If suddenly your arduino IDE does not detect the board, try installing the driver from the driver.exe<br>
 You need to press the 'INSTALL' button. Administrator rights are required.<br>
 Link to virustotal:<br> 
