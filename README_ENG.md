@@ -11,7 +11,7 @@ ALL ARDUINO PINOUTS ARE INDICATED AT THE BEGINNING OF THE SKETCH VIA #define</p>
 <p>To configure the connection port, use <strong>'config.py'</strong></p>
 
 <p>You can find out which port your Arduino is connected to using the Arduino IDE:<br>
-<img src="https://live.staticflickr.com/65535/54202269335_bebd96b923_m.jpg">
+<img src="https://live.staticflickr.com/65535/54205673675_f46eb8a446.jpg">
 </p>
 
 <p>Or using the test script in this folder called test.py. The output will look something like this:<br>

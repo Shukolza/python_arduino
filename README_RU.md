@@ -12,7 +12,7 @@
 
 <p>
 Найти в какой порт у вас подключена Arduino вы можете используя Arduino IDE:<br>
-<img src="https://live.staticflickr.com/65535/54202269335_bebd96b923_m.jpg">
+<img src="https://live.staticflickr.com/65535/54205673675_f46eb8a446.jpg">
 </p>
 
 <p>Или используя тестовый скрипт в этой папке под названием test.py. Вывод будет выглядеть как то так:<br>
