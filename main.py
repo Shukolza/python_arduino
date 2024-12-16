@@ -7,8 +7,10 @@ import webbrowser
 
 LANGUAGE = str()
 
+
 def contact_me():
-    webbrowser.open('t.me/shukolza', new=2)
+    webbrowser.open("t.me/shukolza", new=2)
+
 
 def send_delay():
     global arduino
@@ -18,7 +20,9 @@ def send_delay():
     try:
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
-        status_label.config(text=f"ОШИБКА! {exc}")
+        status_label.config(
+            text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}"
+        )
         return
     if delay_ms < 0:
         status_label.config(
@@ -34,7 +38,11 @@ def send_delay():
     )
     arduino.write(command.encode())
     status_label.config(
-        text=f"Отправлено: {delay_ms / 1000} с" if LANGUAGE == "RU" else f"{delay_ms}ms sent"
+        text=(
+            f"Отправлено: {delay_ms / 1000} с"
+            if LANGUAGE == "RU"
+            else f"{delay_ms}ms sent"
+        )
     )
 
 
@@ -62,7 +70,7 @@ with open("language.txt", "r") as file:
         choose_language = tkinter.Tk()
         choose_language.title("Choose language")
         choose_language.geometry("300x100")
-        choose_language.iconbitmap('img/134948246.ico')
+        choose_language.iconbitmap("img/134948246.ico")
 
         languages_label = ttk.Label(
             choose_language, text="Choose language / Выберите язык"
@@ -83,7 +91,7 @@ with open("language.txt", "r") as file:
 main_window = tkinter.Tk()
 main_window.title("Управление arduino" if LANGUAGE == "RU" else "Arduino control")
 main_window.geometry("800x600")
-main_window.iconbitmap('img/134948246.ico')
+main_window.iconbitmap("img/134948246.ico")
 
 delay_entry = ttk.Entry(main_window)
 button_test = ttk.Button(
@@ -107,8 +115,11 @@ attention = ttk.Label(
 )
 attention.pack()
 
-contact_me = ttk.Button(text='Связаться с разработчиком' if LANGUAGE == 'RU' else 'Contact developer', command=contact_me)
-contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor='se')
+contact_me = ttk.Button(
+    text="Связаться с разработчиком" if LANGUAGE == "RU" else "Contact developer",
+    command=contact_me,
+)
+contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se")
 
 try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
