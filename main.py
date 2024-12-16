@@ -31,7 +31,7 @@ def send_delay():
     )
     arduino.write(command.encode())
     status_label.config(
-        text=f"Отправлено: {delay_ms} мс" if LANGUAGE == "RU" else f"{delay_ms}ms sent"
+        text=f"Отправлено: {delay_ms / 1000} с" if LANGUAGE == "RU" else f"{delay_ms}ms sent"
     )
 
 
