@@ -107,7 +107,7 @@ attention = ttk.Label(
 )
 attention.pack()
 
-contact_me = ttk.Button(text='Связаться с разработчиком', command=contact_me)
+contact_me = ttk.Button(text='Связаться с разработчиком' if LANGUAGE == 'RU' else 'Contact developer', command=contact_me)
 contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor='se')
 
 try:
