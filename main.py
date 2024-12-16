@@ -3,9 +3,12 @@ import serial
 from time import sleep
 import tkinter
 from tkinter import ttk
+import webbrowser
 
 LANGUAGE = str()
 
+def contact_me():
+    webbrowser.open('t.me/shukolza', new=2)
 
 def send_delay():
     global arduino
@@ -103,6 +106,9 @@ attention = ttk.Label(
     ),
 )
 attention.pack()
+
+contact_me = ttk.Button(text='Связаться с разработчиком', command=contact_me)
+contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor='se')
 
 try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
