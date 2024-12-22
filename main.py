@@ -23,11 +23,13 @@ def send_delay():
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
         messagebox.showerror(
+            title="ОШИБКА" if LANGUAGE == "RU" else "ERROR",
             text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}"
         )
         return
     if delay_ms < 0:
         messagebox.showerror(
+            title="ОШИБКА" if LANGUAGE == "RU" else "ERROR",
             text=(
                 "Задержка должна быть неотрицательной"
                 if LANGUAGE == "RU"
@@ -40,6 +42,7 @@ def send_delay():
     )
     arduino.write(command.encode())
     messagebox.showinfo(
+        title="УСПЕШНО" if LANGUAGE == "RU" else "SUCCESSFUL",
         text=(
             f"Отправлено: {delay_ms / 1000} с"
             if LANGUAGE == "RU"
@@ -129,11 +132,12 @@ try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
     sleep(2)
     messagebox.showinfo(
+        title="УСПЕШНО" if LANGUAGE == "RU" else "SUCCESSFUL",
         text="Подключено к Arduino" if LANGUAGE == "RU" else "Arduino connected"
     )
 except serial.SerialException:
     messagebox.showerror(
-        title="Error" if LANGUAGE == "EN" else "Ошибка",
+        title="ERROR" if LANGUAGE == "EN" else "ERROR",
         message=(
             "Не удается подключиться к Arduino"
             if LANGUAGE == "RU"
