@@ -1,8 +1,8 @@
 from config import ARDUINO_PORT, BAUDRATE
 import serial
 from time import sleep
-import tkinter
-from tkinter import ttk
+import tkinter as tk
+from tkinter import ttk, messagebox
 import webbrowser
 
 LANGUAGE = str()
@@ -22,12 +22,12 @@ def send_delay():
     try:
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
-        status_label.config(
+        messagebox.showerror(
             text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}"
         )
         return
     if delay_ms < 0:
-        status_label.config(
+        messagebox.showerror(
             text=(
                 "Задержка должна быть неотрицательной"
                 if LANGUAGE == "RU"
@@ -39,7 +39,7 @@ def send_delay():
         f"{delay_ms}\n"  # Добавляем символ новой строки для обозначения конца сообщения
     )
     arduino.write(command.encode())
-    status_label.config(
+    messagebox.showinfo(
         text=(
             f"Отправлено: {delay_ms / 1000} с"
             if LANGUAGE == "RU"
@@ -71,7 +71,7 @@ def english():
 with open("language.txt", "r") as file:
     lang = file.read()
     if lang == "":
-        choose_language = tkinter.Tk()
+        choose_language = tk.Tk()
         choose_language.title("Choose language")
         choose_language.geometry("300x100")
         choose_language.iconbitmap("img/134948246.ico")
@@ -92,7 +92,7 @@ with open("language.txt", "r") as file:
     else:
         LANGUAGE = "EN"
 
-main_window = tkinter.Tk()
+main_window = tk.Tk()
 main_window.title("Управление arduino" if LANGUAGE == "RU" else "Arduino control")
 main_window.geometry("800x600")
 main_window.iconbitmap("img/134948246.ico")
@@ -128,12 +128,17 @@ contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se")
 try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
     sleep(2)
-    status_label.config(
+    messagebox.showinfo(
         text="Подключено к Arduino" if LANGUAGE == "RU" else "Arduino connected"
     )
 except serial.SerialException:
-    status_label.config(
-        text="Не удается подключиться!" if LANGUAGE == "RU" else "Can not connect!"
+    messagebox.showerror(
+        title="Error" if LANGUAGE == "EN" else "Ошибка",
+        message=(
+            "Не удается подключиться к Arduino"
+            if LANGUAGE == "RU"
+            else "Can not connect to Arduino"
+        )
     )
 
 main_window.mainloop()
