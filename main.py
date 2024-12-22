@@ -9,10 +9,12 @@ LANGUAGE = str()
 
 
 def contact_me():
+    """Opens my telegram in browser"""
     webbrowser.open("t.me/shukolza", new=2)
 
 
 def send_delay():
+    """Sends delay to the arduino with serial port"""
     global arduino
     global delay_entry
     global status_label
@@ -47,6 +49,7 @@ def send_delay():
 
 
 def russian():
+    """Sets language to russian"""
     global LANGUAGE
     choose_language.destroy()
     choose_language.quit()
@@ -56,6 +59,7 @@ def russian():
 
 
 def english():
+    """Sets language to english"""
     global LANGUAGE
     choose_language.destroy()
     choose_language.quit()
