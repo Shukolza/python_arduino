@@ -24,7 +24,7 @@ def send_delay():
     except ValueError as exc:
         messagebox.showerror(
             title="ОШИБКА" if LANGUAGE == "RU" else "ERROR",
-            text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}"
+            text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}",
         )
         return
     if delay_ms < 0:
@@ -34,7 +34,7 @@ def send_delay():
                 "Задержка должна быть неотрицательной"
                 if LANGUAGE == "RU"
                 else "The delay must be non-negative"
-            )
+            ),
         )
         return
     command = (
@@ -47,7 +47,7 @@ def send_delay():
             f"Отправлено: {delay_ms / 1000} с"
             if LANGUAGE == "RU"
             else f"{delay_ms}ms sent"
-        )
+        ),
     )
 
 
@@ -57,8 +57,8 @@ def russian():
     choose_language.destroy()
     choose_language.quit()
     LANGUAGE = "RU"
-    with open("language.txt", "w") as file:
-        file.write(LANGUAGE)
+    with open("language.txt", "w") as lang_file:
+        lang_file.write(LANGUAGE)
 
 
 def english():
@@ -67,8 +67,8 @@ def english():
     choose_language.destroy()
     choose_language.quit()
     LANGUAGE = "EN"
-    with open("language.txt", "w") as file:
-        file.write(LANGUAGE)
+    with open("language.txt", "w") as lang_file:
+        lang_file.write(LANGUAGE)
 
 
 with open("language.txt", "r") as file:
@@ -133,7 +133,7 @@ try:
     sleep(2)
     messagebox.showinfo(
         title="УСПЕШНО" if LANGUAGE == "RU" else "SUCCESSFUL",
-        text="Подключено к Arduino" if LANGUAGE == "RU" else "Arduino connected"
+        text="Подключено к Arduino" if LANGUAGE == "RU" else "Arduino connected",
     )
 except serial.SerialException:
     messagebox.showerror(
@@ -142,7 +142,7 @@ except serial.SerialException:
             "Не удается подключиться к Arduino"
             if LANGUAGE == "RU"
             else "Can not connect to Arduino"
-        )
+        ),
     )
 
 main_window.mainloop()
