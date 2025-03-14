@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import webbrowser
 
-LANGUAGE = str()
+language = str()
 
 
 def contact_me():
@@ -18,21 +18,21 @@ def send_delay():
     global arduino
     global delay_entry
     global status_label
-    global LANGUAGE
+    global language
     try:
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
-        messagebox.showerror(
-            title="ОШИБКА" if LANGUAGE == "RU" else "ERROR",
-            text=f"ОШИБКА! {exc}" if LANGUAGE == "RU" else f"ERROR! {exc}",
+        messagebox.showerror( # type: ignore
+            title="ОШИБКА" if language == "RU" else "ERROR",
+            text=f"ОШИБКА! {exc}" if language == "RU" else f"ERROR! {exc}",
         )
         return
     if delay_ms < 0:
-        messagebox.showerror(
-            title="ОШИБКА" if LANGUAGE == "RU" else "ERROR",
+        messagebox.showerror( # type: ignore
+            title="ОШИБКА" if language == "RU" else "ERROR",
             text=(
                 "Задержка должна быть неотрицательной"
-                if LANGUAGE == "RU"
+                if language == "RU"
                 else "The delay must be non-negative"
             ),
         )
@@ -41,11 +41,11 @@ def send_delay():
         f"{delay_ms}\n"  # Добавляем символ новой строки для обозначения конца сообщения
     )
     arduino.write(command.encode())
-    messagebox.showinfo(
-        title="УСПЕШНО" if LANGUAGE == "RU" else "SUCCESSFUL",
+    messagebox.showinfo( # type: ignore
+        title="УСПЕШНО" if language == "RU" else "SUCCESSFUL",
         text=(
             f"Отправлено: {delay_ms / 1000} с"
-            if LANGUAGE == "RU"
+            if language == "RU"
             else f"{delay_ms}ms sent"
         ),
     )
@@ -53,22 +53,22 @@ def send_delay():
 
 def russian():
     """Sets language to russian"""
-    global LANGUAGE
+    global language
     choose_language.destroy()
     choose_language.quit()
-    LANGUAGE = "RU"
+    language = "RU"
     with open("language.txt", "w") as lang_file:
-        lang_file.write(LANGUAGE)
+        lang_file.write(language)
 
 
 def english():
     """Sets language to english"""
-    global LANGUAGE
+    global language
     choose_language.destroy()
     choose_language.quit()
-    LANGUAGE = "EN"
+    language = "EN"
     with open("language.txt", "w") as lang_file:
-        lang_file.write(LANGUAGE)
+        lang_file.write(language)
 
 
 with open("language.txt", "r") as file:
@@ -77,7 +77,7 @@ with open("language.txt", "r") as file:
         choose_language = tk.Tk()
         choose_language.title("Choose language")
         choose_language.geometry("300x100")
-        choose_language.iconbitmap("img/134948246.ico")
+        choose_language.iconbitmap("img/134948246.ico") # type: ignore
 
         languages_label = ttk.Label(
             choose_language, text="Choose language / Выберите язык"
@@ -91,19 +91,19 @@ with open("language.txt", "r") as file:
 
         choose_language.mainloop()
     elif lang == "RU":
-        LANGUAGE = "RU"
+        language = "RU"
     else:
-        LANGUAGE = "EN"
+        language = "EN"
 
 main_window = tk.Tk()
-main_window.title("Управление arduino" if LANGUAGE == "RU" else "Arduino control")
+main_window.title("Управление arduino" if language == "RU" else "Arduino control")
 main_window.geometry("800x600")
-main_window.iconbitmap("img/134948246.ico")
+main_window.iconbitmap("img/134948246.ico") # type: ignore
 
 delay_entry = ttk.Entry(main_window)
 button_test = ttk.Button(
     main_window,
-    text="Задать задержку" if LANGUAGE == "RU" else "Set delay",
+    text="Задать задержку" if language == "RU" else "Set delay",
     command=send_delay,
 )
 delay_entry.pack()
@@ -116,31 +116,31 @@ attention = ttk.Label(
     main_window,
     text=(
         "Задержку нужно вводить в секундах!"
-        if LANGUAGE == "RU"
+        if language == "RU"
         else "The delay must be entered in seconds"
     ),
 )
 attention.pack()
 
 contact_me = ttk.Button(
-    text="Связаться с разработчиком" if LANGUAGE == "RU" else "Contact developer",
+    text="Связаться с разработчиком" if language == "RU" else "Contact developer",
     command=contact_me,
-)
-contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se")
+) # type: ignore
+contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se") # type: ignore
 
 try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
     sleep(2)
-    messagebox.showinfo(
-        title="УСПЕШНО" if LANGUAGE == "RU" else "SUCCESSFUL",
-        text="Подключено к Arduino" if LANGUAGE == "RU" else "Arduino connected",
+    messagebox.showinfo( # type: ignore
+        title="УСПЕШНО" if language == "RU" else "SUCCESSFUL",
+        text="Подключено к Arduino" if language == "RU" else "Arduino connected",
     )
 except serial.SerialException:
-    messagebox.showerror(
-        title="ERROR" if LANGUAGE == "EN" else "ERROR",
+    messagebox.showerror( # type: ignore
+        title="ERROR" if language == "EN" else "ERROR",
         message=(
             "Не удается подключиться к Arduino"
-            if LANGUAGE == "RU"
+            if language == "RU"
             else "Can not connect to Arduino"
         ),
     )
