@@ -4,8 +4,16 @@ from time import sleep
 import tkinter as tk
 from tkinter import ttk, messagebox
 import webbrowser
+from tkinter import PhotoImage
 
 language = str()
+
+def set_icon(window: tk.Tk) -> None:
+    try:
+        icon = PhotoImage(file="img/134948246.png")
+        window.iconphoto(False, icon)
+    except Exception as e:
+        print(f"ERROR installing icon: {e}" if language == 'EN' else f'ОШИБКА установки иконки: {e}')
 
 
 def contact_me():
@@ -77,7 +85,7 @@ with open("language.txt", "r") as file:
         choose_language = tk.Tk()
         choose_language.title("Choose language")
         choose_language.geometry("300x100")
-        choose_language.iconbitmap("img/134948246.ico") # type: ignore
+        set_icon(choose_language)
 
         languages_label = ttk.Label(
             choose_language, text="Choose language / Выберите язык"
@@ -98,7 +106,7 @@ with open("language.txt", "r") as file:
 main_window = tk.Tk()
 main_window.title("Управление arduino" if language == "RU" else "Arduino control")
 main_window.geometry("800x600")
-main_window.iconbitmap("img/134948246.ico") # type: ignore
+set_icon(main_window)
 
 delay_entry = ttk.Entry(main_window)
 button_test = ttk.Button(
