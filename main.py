@@ -8,12 +8,17 @@ from tkinter import PhotoImage
 
 language = str()
 
+
 def set_icon(window: tk.Tk) -> None:
     try:
         icon = PhotoImage(file="img/134948246.png")
         window.iconphoto(False, icon)
     except Exception as e:
-        print(f"ERROR installing icon: {e}" if language == 'EN' else f'ОШИБКА установки иконки: {e}')
+        print(
+            f"ERROR installing icon: {e}"
+            if language == "EN"
+            else f"ОШИБКА установки иконки: {e}"
+        )
 
 
 def contact_me():
@@ -30,13 +35,13 @@ def send_delay():
     try:
         delay_ms = int(delay_entry.get()) * 1000
     except ValueError as exc:
-        messagebox.showerror( # type: ignore
+        messagebox.showerror(  # type: ignore
             title="ОШИБКА" if language == "RU" else "ERROR",
             text=f"ОШИБКА! {exc}" if language == "RU" else f"ERROR! {exc}",
         )
         return
     if delay_ms < 0:
-        messagebox.showerror( # type: ignore
+        messagebox.showerror(  # type: ignore
             title="ОШИБКА" if language == "RU" else "ERROR",
             text=(
                 "Задержка должна быть неотрицательной"
@@ -49,7 +54,7 @@ def send_delay():
         f"{delay_ms}\n"  # Добавляем символ новой строки для обозначения конца сообщения
     )
     arduino.write(command.encode())
-    messagebox.showinfo( # type: ignore
+    messagebox.showinfo(  # type: ignore
         title="УСПЕШНО" if language == "RU" else "SUCCESSFUL",
         text=(
             f"Отправлено: {delay_ms / 1000} с"
@@ -133,18 +138,18 @@ attention.pack()
 contact_me = ttk.Button(
     text="Связаться с разработчиком" if language == "RU" else "Contact developer",
     command=contact_me,
-) # type: ignore
-contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se") # type: ignore
+)  # type: ignore
+contact_me.place(rely=1.0, relx=1.0, x=0, y=0, anchor="se")  # type: ignore
 
 try:
     arduino = serial.Serial(ARDUINO_PORT, BAUDRATE, timeout=1)
     sleep(2)
-    messagebox.showinfo( # type: ignore
+    messagebox.showinfo(  # type: ignore
         title="УСПЕШНО" if language == "RU" else "SUCCESSFUL",
         text="Подключено к Arduino" if language == "RU" else "Arduino connected",
     )
 except serial.SerialException:
-    messagebox.showerror( # type: ignore
+    messagebox.showerror(  # type: ignore
         title="ERROR" if language == "EN" else "ERROR",
         message=(
             "Не удается подключиться к Arduino"
