@@ -5,13 +5,24 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import webbrowser
 from tkinter import PhotoImage
+import os
+import sys
 
 language = str()
 
+def resource_path(relative_path: str) -> str:
+    """Get a correct file path for compiled EXE"""
+    if hasattr(sys, "_MEIPASS"):
+        # Temp folder PyInstaller
+        base_path: str = getattr(sys, "_MEIPASS")
+    else:
+        # Standard mode (launched via Python)
+        base_path: str = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
 
 def set_icon(window: tk.Tk) -> None:
     try:
-        icon = PhotoImage(file="img/134948246.png")
+        icon = PhotoImage(file=resource_path("img/134948246.png"))
         window.iconphoto(False, icon)
     except Exception as e:
         print(
@@ -70,7 +81,7 @@ def russian():
     choose_language.destroy()
     choose_language.quit()
     language = "RU"
-    with open("language.txt", "w") as lang_file:
+    with open(resource_path("language.txt"), "w") as lang_file:
         lang_file.write(language)
 
 
@@ -80,7 +91,7 @@ def english():
     choose_language.destroy()
     choose_language.quit()
     language = "EN"
-    with open("language.txt", "w") as lang_file:
+    with open(resource_path("language.txt"), "w") as lang_file:
         lang_file.write(language)
 
 
